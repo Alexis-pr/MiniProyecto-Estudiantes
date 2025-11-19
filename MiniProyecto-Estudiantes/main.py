@@ -64,20 +64,29 @@ def guardar(nombre,grado,notaFinal): # funcion que toma 3 parametros y los guard
 
 # --- mostrar ---
 def mostrar():
+    global estudiantes
     if not estudiantes: # valida que la lista estudiante no este vacia
-        print("no existe ningun listado de estudiantes..")
+        if os.path.exists("estudiantes.json"):
+            print("Cargando estudiantes desde el archivo JSON...")
+            with open("estudiantes.json", "r") as f:
+                estudiantes = json.load(f)
+            imprimirEstudiantes()
+        else:
+            print("no existe ningun listado de estudiantes..")
     else:
-        for i, estudent in enumerate(estudiantes, start=1): # se crea dos variables para almacenar la posicion ( clave, valor)
-            print(f"el estudiante #{i}")# muestra el ID o numero de la posicion
-            # la F dentro del prin permite concatenar texto y variables dentro de las llaves
-            #estudent[i]["grado"]
-
-            #imprime los valores
-            print(f" se llama {estudent["nombre"]}")            
-            print(f"El grado es {estudent["grado"]}")
-            print(f"la nota final es {estudent["notaFinal"]}\n")
+        imprimirEstudiantes()
             
 
+def imprimirEstudiantes():
+    for i, estudent in enumerate(estudiantes, start=1): # se crea dos variables para almacenar la posicion ( clave, valor)
+        print(f"el estudiante #{i}")# muestra el ID o numero de la posicion
+        # la F dentro del prin permite concatenar texto y variables dentro de las llaves
+        #estudent[i]["grado"]
+
+        #imprime los valores
+        print(f" se llama {estudent["nombre"]}")            
+        print(f"El grado es {estudent["grado"]}")
+        print(f"la nota final es {estudent["notaFinal"]}\n")
 
 # ---- actualizar --- 
 def actualizar():
