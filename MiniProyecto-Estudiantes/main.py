@@ -137,7 +137,8 @@ def convertircsv():
 
     dato = datos[0].keys()
 
-    with open('datos.csv','w',newline=',',encoding='utf-8') as archivo_csv:
+    
+    with open('datos.csv', 'w', newline='', encoding='utf-8') as archivo_csv:
         writer = csv.DictWriter(archivo_csv,fieldnames= dato   )
         writer.writeheader()
         for i in datos:
